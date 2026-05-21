@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #1a0a1a;
+  --accent-red: #ff0040;
+  --accent-pink: #ff6b6b;
+  --accent-purple: #b829dd;
+  --accent-blue: #00d4ff;
+  --accent-gold: #ffd700;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.message-container,
+.letter-container {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-wrapper {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+@supports (padding: max(0px)) {
+  .safe-area-wrapper {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding-top: max(16px, env(safe-area-inset-top));
+  }
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+/* Orbitron font */
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
+}
+
+.font-cairo {
+  font-family: 'Cairo', sans-serif;
+}
+
+.font-indie {
+  font-family: 'Indie Flower', cursive;
+}
+
+/* Touch feedback */
+.touch-target {
+  min-height: 48px;
+  min-width: 48px;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.touch-target:active {
+  transform: scale(0.95);
+  transition: transform 0.15s;
+}
+
+/* Cursor blink */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  animation: cursor-blink 1s infinite;
+  color: #fff;
+  margin-left: 2px;
+}
+
+/* Heart pulse */
+@keyframes heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.heart-pulse {
+  animation: heart-pulse 1s ease-in-out infinite;
+}
+
+/* Lock pulse */
+@keyframes lock-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.lock-pulse {
+  animation: lock-pulse 2s ease-in-out infinite;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* Gradient backgrounds */
+.bg-gate {
+  background: radial-gradient(ellipse at center, #0d0020 0%, #000005 70%);
+}
+
+.bg-question {
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a0a1a 100%);
+}
+
+.bg-letter {
+  background: radial-gradient(ellipse at center, #1a0510 0%, #0a0a0f 80%);
+}
+
+.bg-cake {
+  background: linear-gradient(160deg, #1a0a10 0%, #0f0508 100%);
+}
+
+.bg-cartoon {
+  background: linear-gradient(180deg, #3d2817 0%, #2a1a0e 100%);
+}
+
+.bg-final {
+  background: radial-gradient(ellipse at 30% 40%, #0a0a1a 0%, #1a0a1a 100%);
+}
+
+/* Canvas overlay */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Scrollbar hiding */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* RTL fix */
+[dir="rtl"] {
+  text-align: right;
+}
+
+.text-center-force {
+  text-align: center !important;
+  direction: rtl;
+}
+
+/* Vignette */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none;
+}
+
+/* Progress dots */
+.progress-dots {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.progress-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+
+.progress-dot.active {
+  background: var(--accent-red);
+  transform: scale(1.5);
+}
+
+/* Confetti particle */
+.confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Typing effect for message */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Glow text */
+.glow-red {
+  text-shadow: 0 0 20px rgba(255, 0, 64, 0.5), 0 0 40px rgba(255, 0, 64, 0.3);
+}
+
+.glow-gold {
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+/* Page transition overlay */
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0f;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+}
